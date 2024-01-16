@@ -9,12 +9,14 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/cli": "^12.3.2",
     "expo": "~49.0.15",
     "expo-cli": "^6.3.10",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.73.2",
+    "react-native-eject": "^0.2.0",
     "react-native-web": "^0.19.10"
   },
   "devDependencies": {

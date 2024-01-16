@@ -1,7 +1,11 @@
 {
+  "name": "appbasic",
+  "displayName": "appbasic",
+  "version": "1.0.0",
+  "description": "Descripción de tu aplicación",
   "expo": {
-    "name": "AppBasic",
-    "slug": "AppBasic",
+    "name": "appbasic",
+    "slug": "appbasic",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

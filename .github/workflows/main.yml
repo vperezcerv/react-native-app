@@ -1,0 +1,36 @@
+name: React Native Build and Release
+
+on:
+  push:
+    branches:
+      - produccion
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+    
+    - name: Install Dependencies
+      run: |
+        yarn install
+
+    - name: Install Dependencies
+      run: |
+        npm install
+
+    - name: Setup Android SDK
+      uses: reactivecircuits/setup-android@v2
+      with:
+        components: 'build-tools;29.0.2'
+
+    - name: Build Android Release
+      run: |
+        cd android && ./gradlew assembleRelease

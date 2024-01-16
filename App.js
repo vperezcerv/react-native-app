@@ -6,7 +6,7 @@ export default function App() {
   const [user, setUser] = useState("");
 
   useEffect(()=>{
-    getBio('basarat').then(setUser);
+    getBio('vperezcerv').then(setUser);
   }, []);
 
   async function getBio(username){
