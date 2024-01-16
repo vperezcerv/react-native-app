@@ -22,19 +22,16 @@ jobs:
       run: |
         npm install
 
-    - name: Find Android SDK Path
-      id: android-path
-      run: |
-        echo "ANDROID_SDK_PATH=$(dirname $(dirname $(which sdkmanager)))" >> $GITHUB_ENV
-
-    - name: Setup Android SDK
-      uses: actions/setup-java@v2
+    - uses: actions/setup-java@v3
       with:
-        distribution: 'adopt'
-        java-version: '11'
+        distribution: 'temurin'
+        java-version: '17'
 
-    - name: Configure SDK
-      run: echo "y" | $ANDROID_SDK_PATH/tools/bin/sdkmanager "platforms;android-30"
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
 
     - name: Build Android Release
       run: |
