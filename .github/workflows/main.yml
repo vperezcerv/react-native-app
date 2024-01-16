@@ -38,4 +38,4 @@ jobs:
 
     - name: Build Android Release
       run: |
-         ./gradlew assembleRelease
+        cd android && ./gradlew assembleRelease
