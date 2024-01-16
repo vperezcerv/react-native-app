@@ -22,6 +22,11 @@ jobs:
       run: |
         npm install
 
+    - name: Find Android SDK Path
+      id: android-path
+      run: |
+        echo "ANDROID_SDK_PATH=$(dirname $(dirname $(which sdkmanager)))" >> $GITHUB_ENV
+
     - name: Setup Android SDK
       uses: actions/setup-java@v2
       with:
@@ -29,7 +34,7 @@ jobs:
         java-version: '11'
 
     - name: Configure SDK
-      run: echo "y" | $RUNNER_TOOL_CACHE/adopt-$(java -version 2>&1 | awk -F '"' '/version/ {print $2}')-hotspot-x64/bin/sdkmanager "platforms;android-30"
+      run: echo "y" | $ANDROID_SDK_PATH/tools/bin/sdkmanager "platforms;android-30"
 
     - name: Build Android Release
       run: |
