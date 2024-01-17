@@ -43,3 +43,7 @@ jobs:
     - name: Build Android Release
       run: |
         cd android && ./gradlew assembleDebug
+    
+    - name: Build Android Release
+      run: |
+        cd android/app && ls -l
