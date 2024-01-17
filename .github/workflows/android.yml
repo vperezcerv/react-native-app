@@ -1,0 +1,51 @@
+name: React Native Build and Release
+
+on:
+  push:
+    branches:
+      - produccion
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+
+    - name: Install Dependencies
+      run: |
+        npm install
+
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+
+    - name: Make gradlew executable
+      run: cd android && chmod +x ./gradlew
+       
+    - name: Build Android Release
+      run: |
+        cd android && ./gradlew assembleDebug
+    
+    - name: Check files
+      run: |
+        cd android/app/build/outputs/apk/debug && ls -l
+
+    - name: Upload Artifact to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{ secrets.FIREBASE_APP_ID }}
+        serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+        groups: testers
+        file: android/app/build/outputs/apk/debug/app-debug.apk
+        releaseNotes: ${{ inputs.release_notes }}

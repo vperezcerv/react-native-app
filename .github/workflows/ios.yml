@@ -1,0 +1,29 @@
+name: React Native Build and Release
+
+on:
+  push:
+    branches:
+      - produccion
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build and Deploy for iOS
+      run: |
+        npx react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/main.jsbundle --assets-dest ios
