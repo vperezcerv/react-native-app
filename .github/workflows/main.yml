@@ -46,4 +46,4 @@ jobs:
     
     - name: Build Android Release
       run: |
-        cd android/app/build/outputs && ls -l
+        cd android/app/build/outputs/apk && ls -l
