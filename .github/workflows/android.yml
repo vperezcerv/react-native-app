@@ -3,7 +3,7 @@ name: React Native Build and Release
 on:
   push:
     branches:
-      - produccion
+      - main
 
 jobs:
   build:

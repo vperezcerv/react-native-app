@@ -19,7 +19,7 @@ jobs:
         node-version: '14'
 
     - name: Install Firebase CLI
-      run: npm install -g firebase-tools
+      run: npm i metro-config --save-dev
 
     - name: Install Dependencies
       run: npm install
