@@ -19,11 +19,11 @@ jobs:
         node-version: '14'
 
     - name: Install Expo CLI
-      run: npm install -g expo-cli
+      run: npm install -g eas-cli
 
     - name: Install Dependencies
       run: npm install
 
     - name: Build and Deploy for iOS
       run: |
-        expo build:ios
+         eas build -p ios
