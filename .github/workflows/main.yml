@@ -58,6 +58,6 @@ jobs:
     - name: Upload to Firebase App Distribution
       run: |
         firebase appdistribution:distribute app-debug.apk --app ${{ secrets.FIREBASE_APP_ID }} --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes "$GITHUB_REF: ${{ github.event.head_commit.message }}"
-       working-directory: android/app/build/outputs/apk/debug/
+      working-directory: android/app/build/outputs/apk/debug/
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
