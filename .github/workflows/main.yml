@@ -31,19 +31,27 @@ jobs:
       uses: gradle/gradle-build-action@v2
 
     - name: Make gradlew executable
-      run: ls -l
-
-    - name: Make gradlew executable
       run: cd android && chmod +x ./gradlew
-
-    - name: Build Android Release
-      run: |
-        cd android && ./gradlew --stop
-        
+       
     - name: Build Android Release
       run: |
         cd android && ./gradlew assembleDebug
     
-    - name: Build Android Release
+    - name: Check files
       run: |
         cd android/app/build/outputs/apk/debug && ls -l
+
+    # - name: Upload Artifact to Firebase App Distribution
+    #   uses: wzieba/Firebase-Distribution-Github-Action@v1
+    #   with:
+    #     appId: ${{ secrets.FIREBASE_APP_ID }}
+    #     serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+    #     groups: testers
+    #     file: android/app/build/outputs/apk/debug/app-debug.apk
+    #     releaseNotes: ${{ inputs.release_notes }}
+    
+    - name: Upload to Firebase App Distribution
+      run: |
+        firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --file android/app/build/outputs/apk/debug/app-debug.apk --release-notes "$GITHUB_REF: ${{ github.event.head_commit.message }}"
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
