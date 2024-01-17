@@ -49,6 +49,10 @@ jobs:
     #     groups: testers
     #     file: android/app/build/outputs/apk/debug/app-debug.apk
     #     releaseNotes: ${{ inputs.release_notes }}
+
+    - name: Install Firebase CLI
+      run: |
+        npm install -g firebase-tools
     
     - name: Upload to Firebase App Distribution
       run: |
