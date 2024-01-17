@@ -30,5 +30,8 @@ jobs:
         eas-version: latest
         token: ${{ secrets.EXPO_TOKEN }}
 
+    - name: Init on EAS
+      run: eas init
+
     - name: Build on EAS
       run: eas build --platform all --non-interactive --no-wait
